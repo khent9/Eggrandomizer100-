@@ -1,0 +1,67 @@
+-- Starter GUI Setup
+local ScreenGui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+ScreenGui.Name = "TenshiUI"
+
+-- Fixed Toggle Button (TenshiHubs Box)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Size = UDim2.new(0, 100, 0, 30)
+toggleButton.Position = UDim2.new(0, 10, 0, 10)
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+toggleButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+toggleButton.Text = "TenshiHubs"
+toggleButton.Parent = ScreenGui
+
+-- Main UI Frame
+local mainUI = Instance.new("Frame")
+mainUI.Size = UDim2.new(0, 250, 0, 200)
+mainUI.Position = UDim2.new(0, 120, 0, 10)
+mainUI.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+mainUI.Visible = false
+mainUI.Active = true
+mainUI.Draggable = true
+mainUI.Parent = ScreenGui
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.BackgroundTransparency = 1
+title.Text = "By Tenshi!"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextScaled = true
+title.Parent = mainUI
+
+-- Toggle buttons
+local toggles = {
+    {"EGG RANDOMIZER", function()
+        loadstring(game:HttpGet("https://pastefy.app/inoixEbY/raw"))()
+    end},
+    {"EGG ESP"},
+    {"EGG AUTO FIND BEST"},
+    {"EGG LUCK 100% BOOST"},
+}
+
+for i, data in ipairs(toggles) do
+    local name, callback = data[1], data[2]
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, -20, 0, 30)
+    btn.Position = UDim2.new(0, 10, 0, 30 * i)
+    btn.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.Text = name .. " [OFF]"
+    btn.Parent = mainUI
+
+    local on = false
+    btn.MouseButton1Click:Connect(function()
+        on = not on
+        btn.Text = name .. (on and " [ON]" or " [OFF]")
+        if on and callback then
+            callback()
+        end
+    end)
+end
+
+-- Toggle UI visibility
+toggleButton.MouseButton1Click:Connect(function()
+    mainUI.Visible = not mainUI.Visible
+end)
